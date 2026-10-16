@@ -1,0 +1,11 @@
+receipt_id,date,merchant,restaurant_type,cuisine,description,subtotal,tax,tip,total,currency,payment_method,confidence,notes
+T001,2016-05-26,Green Field,Casual Dining,American,Coffee lunch Coke,51.90,4.68,,56.58,USD,Unknown,high,
+T002,2015-04-25,  Grand Lux Cafe , Casual Dining,American,Burger and coffee,63.75,5.50,,69.25,USD,Unknown,high,
+T003,04/25/2015,Cheesecake Factory,Casual Dining,American,Pasta and cheesecake,40.00,3.60,8.00,51.60,USD,Card,high,
+T004,2016-09-01,Taco Bell,Fast Food,Mexican,Burrito and soda,6.98,0.63,,$7.61,USD,Card,high,
+T005,2017-03-12,Pho 99,Restaurant,Vietnamese,Pho and spring rolls,18.00,1.62,3.00,22.62,USD,Card,high,
+T006,2015-06-02,Sage,Cafe,Other,Wine and quiche,41.00,1.80,7.38,39.18,USD,Unknown,high,
+T007,2018-01-15,Unknown Diner,Casual Dining,American,Breakfast,12.50,1.10,,,USD,Cash,high,
+T008,2018-02-30,Joe's Pizza,Fast Food,Italian,Two slices,7.00,0.63,,7.63,USD,Cash,high,
+T002,2019-07-04,Shake Shack,Fast Food,American,Burger and shake,15.50,1.40,,16.90,USD,Apple Pay,medium,Date partly faded
+T010,2019-08-20,Starbucks,Cafe,American,Latte,5.25,0.47,1.00,six seventy two,USD,Card,low,Total smudged
