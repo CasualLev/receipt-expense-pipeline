@@ -14,5 +14,6 @@
 | T008 | Impossible date (February 30) | Excluded, error |
 | T002 (second) | Duplicate receipt_id; `Apple Pay` instead of `Digital Wallet` | Excluded, error |
 | T010 | Total is text, not a number | Excluded, error |
+| T011 | Date empty (unreadable), confidence `low`, valid total | Kept, warning; left out of anything grouped by year |
 
-Expected totals: 10 rows read, 6 kept, 4 excluded.
+Expected totals: 11 rows read, 7 kept, 4 excluded.
