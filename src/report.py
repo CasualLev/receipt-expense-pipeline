@@ -26,8 +26,13 @@ MAX_COLUMN_WIDTH = 60
 
 
 def tip_percentages(clean_rows):
-    """Return tip / subtotal for each receipt with a tip above zero."""
-    has_tip = clean_rows["tip"] > 0
+    """Return tip / subtotal for each receipt with a tip line.
+
+    Following schema.md, an empty tip means there was no tip line, so the
+    receipt is left out. A tip of 0.00 means the tip line showed zero, so it
+    counts as 0%.
+    """
+    has_tip = clean_rows["tip"].notna()
     has_subtotal = clean_rows["subtotal"] > 0
     with_tip = clean_rows[has_tip & has_subtotal]
     return with_tip["tip"] / with_tip["subtotal"]
