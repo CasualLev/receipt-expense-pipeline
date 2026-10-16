@@ -1,11 +1,5 @@
-receipt_id,date,merchant,category,description,amount,currency,payment_method,confidence,notes
-R001,2015-06-02,SAGE, Dining,Salad sandwich and quiche,39.18,USD,Unknown,medium,Receipt date and total readable but payment method not shown
-R002,2016-09-01,Taco Bell,Dining,Power Veg Bowl and orange crush,7.61,USD,Card,high,
-R003,2017-04-20,El Gran Mar de Plata,Dining,Miller Lite,5.35,USD,Cash,high,
-R004,2019-05-18,Golden Bowl Teriyaki,Dining,Chicken plate avocado and drink,15.03,USD,Cash,high,
-R005,2017-08-15,Saska's,Dining,Steak ribeye lobster and drinks,179.94,USD,Unknown,high,
-R006,2018-06-18,Akira,Dining,Sushi and noodle dishes,93.58,USD,Unknown,medium,Date partly legible and payment method not shown
-R007,2018-05-11,Katana Sushi,Dining,Sashimi and poke bowl,153.71,USD,Unknown,medium,Handwritten total used payment method not shown
-R008,,Dona Mercedes Restaurant,Dining,Chicharon pupusa and quesadilla,24.47,USD,Unknown,low,Date and payment method not shown
-R009,2016-05-26,Green Field,Dining,Coffee lunch and coke,56.58,USD,Unknown,high,
-R010,2015-04-25,GRAND LUX CAFE,Dining,Coffee chicken parmesan and steak,69.25,USD,Unknown,high,
+receipt_id,date,merchant,restaurant_type,cuisine,description,subtotal,tax,tip,total,currency,payment_method,confidence,notes
+R001,2016-05-26,Green Field,Casual Dining,American,Coffee lunch Coke,51.90,4.68,,56.58,USD,Unknown,high,
+R002,2015-04-25,Grand Lux Cafe,Casual Dining,American,Coffee chicken parmesan sirloin burger,63.75,5.50,,69.25,USD,Unknown,high,
+R003,2015-06-02,Sage,Cafe,Other,White wine veggie sandwich quiche,30.00,1.80,7.38,39.18,USD,Unknown,high,
+R004,2016-09-01,Taco Bell,Fast Food,Mexican,Power Veg Bowl orange crush,6.98,0.63,,7.61,USD,Card,high,

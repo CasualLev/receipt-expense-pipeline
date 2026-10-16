@@ -13,15 +13,15 @@ This file is the contract between the two stages of the workflow. Stage 1 (Chat 
 
 | # | Column | Type | Rules |
 |---|--------|------|-------|
-| 1 | `receipt_id` | text | The photo's file name without extension (e.g. `R001` for `R001.jpg`). If file names aren't visible, number in upload order. Must be unique. |
+| 1 | `receipt_id` | text | The photo's file name without extension (e.g. `R001` for `R001.jpg`). If file names aren't visible, number in upload order, so photos must be uploaded in file-name order. Must be unique. |
 | 2 | `date` | date | `YYYY-MM-DD`. US receipts print `MM/DD/YYYY` or `MM/DD/YY`; convert them. Empty if unreadable. |
 | 3 | `merchant` | text | Business name as printed, in Title Case (e.g. `Grand Lux Cafe`). Empty if unreadable. |
 | 4 | `restaurant_type` | enum | Exactly one of: `Fast Food`, `Casual Dining`, `Fine Dining`, `Cafe`, `Bar`, `Other`. |
 | 5 | `cuisine` | enum | Exactly one of: `American`, `Mexican`, `Latin American`, `Italian`, `Japanese`, `Chinese`, `Other Asian`, `Mediterranean`, `Other`. |
 | 6 | `description` | text | Up to 6 words naming the main items (e.g. `Burrito bowl and soda`). |
-| 7 | `subtotal` | number | Food and drink before tax and tip. Empty if not shown. |
+| 7 | `subtotal` | number | Food and drink after any discounts, before tax and tip. If a discount is printed, subtract it from the printed subtotal. Empty if not shown. |
 | 8 | `tax` | number | Sales tax. Empty if not shown. |
-| 9 | `tip` | number | Tip or gratuity, printed or handwritten. `0.00` only if the receipt shows a zero tip; empty if there is no tip line. |
+| 9 | `tip` | number | Tip or gratuity actually charged, printed or handwritten. Suggested gratuity amounts are not tips. `0.00` only if a tip line shows zero; empty if there is no tip line. Item modifier lines priced at 0.00 are not tips. |
 | 10 | `total` | number | Final amount paid, including tax and tip. If a tip and total are handwritten, use the handwritten total. Never use the amount tendered, change or a balance due line. Empty if unreadable. |
 | 11 | `currency` | enum | 3-letter ISO code, normally `USD`. |
 | 12 | `payment_method` | enum | Exactly one of: `Cash`, `Card`, `Digital Wallet`, `Unknown`. Apple Pay and Google Pay are `Digital Wallet`; credit and debit cards are `Card`. |

@@ -8,7 +8,7 @@
 
 1. Rename photos to `R001.jpg`, `R002.jpg`, ... so each row can be traced to its photo.
 2. Start a **new chat** for each run, so earlier conversations don't influence the output.
-3. Upload up to 10 photos per message; smaller batches extract more accurately.
+3. Upload photos **in file-name order** (R001, R002, ...). Chat tools often can't see file names, so upload order is what sets the IDs. Upload up to 10 per message; smaller batches extract more accurately.
 4. Paste the prompt below.
 5. Copy the CSV from the reply into `data/expenses.csv`. For later batches, paste the rows without repeating the header line.
 
@@ -28,9 +28,9 @@ RULES:
 - restaurant_type: exactly one of Fast Food, Casual Dining, Fine Dining, Cafe, Bar, Other.
 - cuisine: exactly one of American, Mexican, Latin American, Italian, Japanese, Chinese, Other Asian, Mediterranean, Other.
 - description: up to 6 words naming the main items.
-- subtotal: food and drink before tax and tip. Empty if not shown.
+- subtotal: food and drink after any discounts, before tax and tip. If a discount is printed, subtract it from the printed subtotal. Empty if not shown.
 - tax: sales tax. Empty if not shown.
-- tip: tip or gratuity, printed or handwritten. 0.00 only if the receipt shows a zero tip. Empty if there is no tip line.
+- tip: tip or gratuity actually charged, printed or handwritten. Suggested gratuity amounts are not tips. 0.00 only if a tip line shows zero. Empty if there is no tip line. Item modifier lines priced at 0.00 (e.g. No Cheese 0.00) are not tips.
 - total: the final amount paid including tax and tip. If a tip and total are handwritten, use the handwritten total. Never use the amount tendered, change or a balance due line.
 - All money values: exactly 2 decimals, no $ sign, spaces or thousands separators ($1,204.50 becomes 1204.50).
 - currency: 3-letter ISO code, normally USD.
