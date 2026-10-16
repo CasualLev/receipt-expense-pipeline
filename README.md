@@ -1,2 +1,2 @@
 # receipt-expense-pipeline
-Receipt pictures text is extracted then converted into a sheet for better analysis of expenses.
+A two-stage AI workflow that turns photos of US food receipts into a food spending report with visualizations by restaurant type, cuisine and time.

@@ -1,7 +1,7 @@
-# Stage 1 Prompt: Receipt Extraction
+# Stage 1 Prompt: Food Receipt Extraction
 
 **Tool:** any vision-capable chat AI (tested with ChatGPT)
-**Input:** receipt photos named `R001.jpg`, `R002.jpg`, ...
+**Input:** food receipt photos named `R001.jpg`, `R002.jpg`, ...
 **Output:** CSV rows following [`schema.md`](../schema.md), saved to `data/expenses.csv`
 
 ## How to use
@@ -15,33 +15,36 @@
 ## Prompt
 
 ```text
-You are a data extraction assistant. Extract data from each attached receipt photo into CSV rows that follow the schema below exactly. A program will parse your output, so any deviation from the format will break it.
-
-DEFAULT_CURRENCY: USD
+You are a data extraction assistant. Extract data from each attached US food receipt photo into CSV rows that follow the schema below exactly. A program will parse your output, so any deviation from the format will break it.
 
 COLUMNS (in this order):
-receipt_id,date,merchant,category,description,amount,currency,payment_method,confidence,notes
+receipt_id,date,merchant,restaurant_type,cuisine,description,subtotal,tax,tip,total,currency,payment_method,confidence,notes
 
 RULES:
 - One row per photo, in the order the photos were attached.
 - receipt_id: the photo's file name without extension (e.g. R001). If you cannot see file names, use R001, R002, ... in upload order.
-- date: YYYY-MM-DD. These are US receipts, so printed dates are MM/DD/YYYY or MM/DD/YY (10/03/26 means 2026-10-03).
-- merchant: business name as printed.
-- category: exactly one of Groceries, Dining, Transport, Shopping, Bills, Health, Other.
-- description: up to 6 words summarizing the purchase.
-- amount: the final total paid, including sales tax and tip. If a tip and total are handwritten, use the handwritten total. Never use the subtotal, amount tendered, change or a balance due line. Write exactly 2 decimals with no $ sign, spaces or thousands separators ($1,204.50 becomes 1204.50).
-- currency: 3-letter ISO code. If no currency is shown, use DEFAULT_CURRENCY.
+- date: YYYY-MM-DD. US receipts print MM/DD/YYYY or MM/DD/YY (10/03/26 means 2026-10-03).
+- merchant: business name as printed, in Title Case.
+- restaurant_type: exactly one of Fast Food, Casual Dining, Fine Dining, Cafe, Bar, Other.
+- cuisine: exactly one of American, Mexican, Latin American, Italian, Japanese, Chinese, Other Asian, Mediterranean, Other.
+- description: up to 6 words naming the main items.
+- subtotal: food and drink before tax and tip. Empty if not shown.
+- tax: sales tax. Empty if not shown.
+- tip: tip or gratuity, printed or handwritten. 0.00 only if the receipt shows a zero tip. Empty if there is no tip line.
+- total: the final amount paid including tax and tip. If a tip and total are handwritten, use the handwritten total. Never use the amount tendered, change or a balance due line.
+- All money values: exactly 2 decimals, no $ sign, spaces or thousands separators ($1,204.50 becomes 1204.50).
+- currency: 3-letter ISO code, normally USD.
 - payment_method: exactly one of Cash, Card, Digital Wallet, Unknown. Apple Pay and Google Pay are Digital Wallet; credit and debit cards are Card.
-- confidence: high if every field is clearly readable; medium if one field was inferred or partly legible; low if date, merchant or amount is missing or doubtful, or if the image is not a receipt.
+- confidence: based only on date, merchant and total. high if all three are clearly readable; medium if one was inferred or partly legible; low if any is missing or doubtful, or if the image is not a food receipt. restaurant_type, cuisine and a missing payment method do not affect confidence.
 - notes: empty when confidence is high; otherwise a short reason.
-- Text must not contain commas, double quotes or line breaks. Replace commas with a space or hyphen.
-- Never guess an unreadable value. Leave it empty, set confidence to low and explain in notes.
+- No spaces before or after any value. Text must not contain commas, double quotes or line breaks. Replace commas with a space or hyphen.
+- Never guess an unreadable value. Leave it empty and explain in notes if it lowers confidence.
 
 EXAMPLE OUTPUT:
-receipt_id,date,merchant,category,description,amount,currency,payment_method,confidence,notes
-R001,2026-10-02,Trader Joe's,Groceries,Weekly groceries,54.37,USD,Card,high,
-R002,2026-10-03,Shell,Transport,Gasoline,41.20,USD,Digital Wallet,medium,Payment method inferred
-R003,,CVS Pharmacy,Health,Medicine,12.89,USD,Cash,low,Date faded
+receipt_id,date,merchant,restaurant_type,cuisine,description,subtotal,tax,tip,total,currency,payment_method,confidence,notes
+R001,2026-10-02,Chipotle,Fast Food,Mexican,Burrito bowl and soda,12.45,1.12,,13.57,USD,Card,high,
+R002,2026-10-04,Olive Garden,Casual Dining,Italian,Pasta and breadsticks,38.50,3.47,8.00,49.97,USD,Card,medium,Tip handwritten and partly legible
+R003,,Blue Bottle Coffee,Cafe,American,Latte and croissant,9.75,0.88,,10.63,USD,Unknown,low,Date faded
 
 OUTPUT FORMAT:
 Reply with only the CSV, including the header row, inside a single code block. No explanation before or after.
