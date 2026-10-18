@@ -60,6 +60,7 @@ PAYMENT_SYNONYMS = {
     "debit card": "Card",
 }
 
+REPORT_CURRENCY = "USD"
 SUM_TOLERANCE = 0.05
 MAX_DESCRIPTION_WORDS = 6
 
@@ -289,12 +290,14 @@ def clean_payment_method(value, log):
 
 
 def clean_currency(value, log):
-    """Upper-case the currency and check it is a 3-letter code."""
+    """Upper-case the currency. Only USD rows can be added to the dollar totals."""
     upper = value.upper()
     if upper != value:
         log.warning("currency", f"Changed '{value}' to '{upper}'")
-    if not re.fullmatch(r"[A-Z]{3}", upper):
-        log.warning("currency", f"Currency '{value}' is not a 3-letter code")
+    if upper == "":
+        log.error("currency", "Currency is missing, so the amounts can't be added to the USD totals")
+    elif upper != REPORT_CURRENCY:
+        log.error("currency", f"Currency '{upper}' is not USD, so the amounts can't be added to the USD totals")
     return upper
 
 

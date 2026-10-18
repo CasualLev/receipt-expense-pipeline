@@ -8,13 +8,16 @@
 
 1. Rename photos to `R001.jpg`, `R002.jpg`, ... so each row can be traced to its photo.
 2. Start a **new chat** for each run, so earlier conversations don't influence the output.
-3. Upload photos **in file-name order** (R001, R002, ...). Chat tools often can't see file names, so upload order is what sets the IDs. Upload up to 10 per message; smaller batches extract more accurately.
-4. Paste the prompt below.
-5. Copy the CSV from the reply into `data/expenses.csv`. For later batches, paste the rows without repeating the header line.
+3. Upload photos **in file-name order** (R001, R002, ...). Chat tools often can't see file names, so upload order is what sets the IDs. Upload up to 10 per message; smaller batches extract more accurately. Check the order in the upload tray before sending: some file pickers sort by date, not name.
+4. Paste the prompt below, and change `FIRST ID IN THIS BATCH` to the first photo you uploaded (e.g. `R011` for the second batch of 10). Without this, every new chat starts numbering again at R001, and the rows clash with earlier batches.
+5. Before saving, spot-check two or three rows against their photos (merchant and total). If they don't match, the upload order was wrong: start a new chat and redo the batch.
+6. Copy the CSV from the reply into `data/expenses.csv`. For later batches, paste the rows without repeating the header line.
 
 ## Prompt
 
 ```text
+FIRST ID IN THIS BATCH: R001
+
 You are a data extraction assistant. Extract data from each attached US food receipt photo into CSV rows that follow the schema below exactly. A program will parse your output, so any deviation from the format will break it.
 
 COLUMNS (in this order):
@@ -22,7 +25,7 @@ receipt_id,date,merchant,restaurant_type,cuisine,description,subtotal,tax,tip,to
 
 RULES:
 - One row per photo, in the order the photos were attached.
-- receipt_id: the photo's file name without extension (e.g. R001). If you cannot see file names, use R001, R002, ... in upload order.
+- receipt_id: the photo's file name without extension (e.g. R001). If you cannot see file names, number the photos in upload order starting from FIRST ID IN THIS BATCH (e.g. R011, R012, ...).
 - date: YYYY-MM-DD. US receipts print MM/DD/YYYY or MM/DD/YY (10/03/26 means 2026-10-03).
 - merchant: business name as printed, in Title Case.
 - restaurant_type: exactly one of Fast Food, Casual Dining, Fine Dining, Cafe, Bar, Other.

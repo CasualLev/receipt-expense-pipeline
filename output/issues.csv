@@ -1,1 +1,8 @@
 receipt_id,row,column,problem,severity
+R008,9,confidence,Confidence is medium: Year inferred from printed date,warning
+R010,11,confidence,Confidence is medium: Merchant name appears truncated on receipt,warning
+R014,15,confidence,Confidence is medium: Date partially legible,warning
+R015,16,confidence,Confidence is medium: Handwritten total suggests 10.00 tip,warning
+R016,17,date,"Date is missing, so this row is left out of anything grouped by year",warning
+R016,17,confidence,Confidence is low: Date not shown,warning
+R019,20,confidence,Confidence is medium: Year inferred from abbreviated date,warning

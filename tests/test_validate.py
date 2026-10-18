@@ -277,6 +277,25 @@ def test_unknown_payment_method_becomes_unknown():
     assert clean_rows.iloc[0]["payment_method"] == "Unknown"
 
 
+def test_non_usd_currency_is_error():
+    clean_rows, issues = validate.validate_rows([make_row(currency="EUR")])
+    assert len(clean_rows) == 0
+    assert has_issue(issues, 2, "currency", validate.ERROR)
+
+
+def test_missing_currency_is_error():
+    clean_rows, issues = validate.validate_rows([make_row(currency="")])
+    assert len(clean_rows) == 0
+    assert has_issue(issues, 2, "currency", validate.ERROR)
+
+
+def test_lowercase_usd_fixed_with_warning():
+    clean_rows, issues = validate.validate_rows([make_row(currency="usd")])
+    assert clean_rows.iloc[0]["currency"] == "USD"
+    assert has_issue(issues, 2, "currency", validate.WARNING)
+    assert not has_error(issues, 2)
+
+
 def test_non_numeric_tax_is_cleared_with_warning():
     clean_rows, issues = validate.validate_rows([make_row(tax="abc")])
     assert len(clean_rows) == 1

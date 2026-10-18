@@ -3,3 +3,18 @@ R001,2016-05-26,Green Field,Casual Dining,American,Coffee lunch Coke,51.90,4.68,
 R002,2015-04-25,Grand Lux Cafe,Casual Dining,American,Coffee chicken parmesan sirloin burger,63.75,5.50,,69.25,USD,Unknown,high,
 R003,2015-06-02,Sage,Cafe,Other,White wine veggie sandwich quiche,30.00,1.80,7.38,39.18,USD,Unknown,high,
 R004,2016-09-01,Taco Bell,Fast Food,Mexican,Power Veg Bowl orange crush,6.98,0.63,,7.61,USD,Card,high,
+R005,2019-02-19,Chef Wang,Casual Dining,Chinese,Scallion pancake pork buns beef,32.70,2.82,,35.52,USD,Unknown,high,
+R006,2016-04-24,Umix,Cafe,Other,Paris and Le Classique,10.20,0.84,,11.04,USD,Cash,high,
+R007,2012-04-27,In-N-Out Burger,Fast Food,American,Hamburger,2.00,0.17,,2.17,USD,Cash,high,
+R008,2012-05-12,Grotto Pizzeria and Tavern,Casual Dining,Italian,Pizza salad beer and bread,43.00,2.58,,45.58,USD,Unknown,medium,Year inferred from printed date
+R009,2019-07-26,Deccan Spice,Casual Dining,Other Asian,Dal fry paneer masala biryani rice,35.95,2.98,8.09,47.02,USD,Unknown,high,
+R010,2018-07-13,Hawwi Ethiopian Restau,Casual Dining,Other,Ethiopian fish goulash dullet vegetarian dish,62.85,6.91,,69.76,USD,Card,medium,Merchant name appears truncated on receipt
+R011,2017-04-20,El Gran Mar de Plata,Bar,Other,Miller Lite beer,5.00,0.35,,5.35,USD,Cash,high,
+R012,2019-05-18,Golden Bowl Teriyaki,Fast Food,Other Asian,Chicken plate avocado drink,13.63,1.40,,15.03,USD,Cash,high,
+R013,2017-08-15,Saska's,Fine Dining,American,Ribeye steak lobster sirloin cocktails,167.00,12.94,,179.94,USD,Unknown,high,
+R014,2018-06-18,Akira,Casual Dining,Japanese,Hibachi steak noodle sushi rolls,86.65,6.93,,93.58,USD,Unknown,medium,Date partially legible
+R015,2018-05-11,Katana Sushi,Casual Dining,Japanese,Hamachi poke bowl sashimi salmon,131.00,12.71,10.00,153.71,USD,Unknown,medium,Handwritten total suggests 10.00 tip
+R016,,Dona Mercedes Restaurant,Casual Dining,Latin American,Chicharron pupusa platanos quesadilla,22.25,2.22,,24.47,USD,Unknown,low,Date not shown
+R017,2019-08-09,Bella Pasta,Casual Dining,Italian,Steak tip skewers gorgonzola beer,28.48,2.28,,30.76,USD,Unknown,high,
+R018,2018-07-21,Friendly Red's of Windham,Casual Dining,American,Margaritas crab cakes chicken sandwich beer,71.40,6.43,,77.83,USD,Unknown,high,
+R019,2015-06-26,Quick 73,Casual Dining,American,Beef ribs pulled pork corn macaroni,59.11,5.32,,64.43,USD,Card,medium,Year inferred from abbreviated date
