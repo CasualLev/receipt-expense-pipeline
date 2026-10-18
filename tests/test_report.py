@@ -127,6 +127,45 @@ def test_column_widths_are_set(workbook):
     assert sheet.column_dimensions["A"].width > 30
 
 
+def make_row(receipt_id, subtotal, tip, total):
+    """Return a valid row dict with the given money values and no tax."""
+    return {
+        "receipt_id": receipt_id,
+        "date": "2026-10-02",
+        "merchant": "Chipotle",
+        "restaurant_type": "Fast Food",
+        "cuisine": "Mexican",
+        "description": "Burrito bowl",
+        "subtotal": subtotal,
+        "tax": "0.00",
+        "tip": tip,
+        "total": total,
+        "currency": "USD",
+        "payment_method": "Card",
+        "confidence": "high",
+        "notes": "",
+    }
+
+
+def test_zero_tip_counts_and_empty_tip_is_left_out():
+    rows = [
+        make_row("X001", "20.00", "0.00", "20.00"),  # tip line showing zero
+        make_row("X002", "20.00", "5.00", "25.00"),  # 25% tip
+        make_row("X003", "10.00", "", "10.00"),  # no tip line
+    ]
+    clean_rows, issues = validate.validate_rows(rows)
+    assert issues == []
+
+    tips = report.tip_percentages(clean_rows)
+    assert list(tips) == [0.0, 0.25]
+
+    summary = {}
+    for metric, value, _ in report.build_summary(clean_rows, issues):
+        summary[metric] = value
+    assert summary["Receipts with a tip"] == 2
+    assert summary["Average tip percentage (receipts with a tip)"] == pytest.approx(0.125)
+
+
 def test_empty_data_does_not_crash(tmp_path):
     csv_path = tmp_path / "header_only.csv"
     csv_path.write_text(",".join(validate.COLUMNS) + "\n")
